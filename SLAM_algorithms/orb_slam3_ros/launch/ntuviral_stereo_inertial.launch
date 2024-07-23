@@ -1,0 +1,41 @@
+<launch>
+    <param name="use_sim_time" value="true" />
+
+    <!-- Missing initial camera to world tf -->
+    <node name="tf2_cam2world" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 /world /camera"/>
+    <!-- x y z yaw pitch roll, pi=3.14159265359  -->
+    <node name="tf2_globaml_frame_id" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 3.14159265359 1.57079632679 /global /world"/>
+
+    <!-- To change verbosity level (terminal console may flood in DEBUG) -->
+    <!-- <env name="ROSCONSOLE_CONFIG_FILE"
+        value="$(find orb_slam3_ros)/../../custom_rosconsole.conf"/> -->
+
+    <!-- Main node -->
+    <node name="orb_slam3" pkg="orb_slam3_ros" type="ros_stereo" output="screen">
+        <!-- change the topics according to the dataso -->
+        <remap from="/camera/left/image_raw"    to="/left/image_raw"/>
+        <remap from="/camera/right/image_raw"    to="/right/image_raw"/>
+        <remap from="/imu"                      to="/imu/imu"/>
+
+        <!-- Parameters for original ORB-SLAM3 -->
+        <param name="voc_file"      type="string" value="$(find orb_slam3_ros)/orb_slam3/Vocabulary/ORBvoc.txt.bin"/>
+        <param name="settings_file" type="string" value="$(find orb_slam3_ros)/config/Stereo-Inertial/NTU_VIRAL.yaml"/>
+
+        <!-- Parameters for ROS -->
+        <param name="world_frame_id"    type="string"   value="world" />
+        <param name="cam_frame_id"      type="string"   value="camera" />
+        <param name="imu_frame_id"      type="string"   value="imu" />
+        <param name="enable_pangolin"   type="bool"     value="true" />
+    </node>
+    
+    <!-- Visualization -->
+    <!-- node name="rviz" pkg="rviz" type="rviz" args="-d $(find orb_slam3_ros)/config/ntuviral_no_imu.rviz" output="screen" /-->
+    
+    <!-- Trajectory path -->
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server_orb_slam3" output="screen" ns="orb_slam3_ros" >
+        <param name="/target_frame_name"        value="/world" />
+        <param name="/source_frame_name"        value="/camera" />
+        <param name="/trajectory_update_rate"   value="20.0" />
+        <param name="/trajectory_publish_rate"  value="20.0" />
+    </node>
+</launch>
