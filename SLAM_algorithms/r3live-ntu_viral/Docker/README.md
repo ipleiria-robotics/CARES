@@ -66,7 +66,7 @@ If you just want to delete contents related to a specific docker, refer to the [
 If you cant run any **docker** command, you may not be on the same usergroup as docker. To solve this just [add user to docker group](https://www.configserverfirewall.com/ubuntu-linux/add-user-to-docker-group-ubuntu/).
 
 # License
-The files named "Dockerfile" and "entrypoint.sh" present on the same folder as this text file, are released under the Apache License 2.0, see [LICENSE](https://github.com/Ab-Tx/r3live-ros-docker-vnc/blob/master/LICENSE).
+The files named "Dockerfile" and "entrypoint.sh" present on the same folder as this text file, are released under the Apache License 2.0, see [LICENSE](https://github.com/ipleiria-robotics/CARES/blob/main/SLAM_algorithms/r3live-ntu_viral/Docker/LICENSE).
 
 ### Acknowledgements
 
