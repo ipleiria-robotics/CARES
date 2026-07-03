@@ -17,3 +17,12 @@ If this repository is of use to you, please cite:
   doi={10.1109/ROBOT61475.2024.10796865}}
 
 ```
+
+# Changelog
+
+If you are interested in our work, view the associated dissertation available at: (link will be added soon) 
+
+The associated algorithm database is available at https://github.com/ipleiria-robotics/3DMoBot-ros2-workspace/tree/main/Documents
+
+The robot software-side implementation is described in the dissertation at https://github.com/ipleiria-robotics/3DMoBot-ros2-workspace/ 
+
